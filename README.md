@@ -114,6 +114,12 @@ DevProof/
 - Add unique indexes for project names
 - Implement authentication and authorization
 
+## Screenshots
+
+### Dashboard
+
+![DevProof Dashboard](dashboard.png)
+
 ## Important Notes
 
 - This project is intended for local learning and development. It does not include authentication, so do not expose it publicly as-is.
