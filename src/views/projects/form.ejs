@@ -1,0 +1,11 @@
+<%- include("../partials/header", { title }) %>
+<div class="page-heading mb-4"><p class="eyebrow">PROJECT VAULT</p><h1><%= isEdit ? "Edit project" : "Add a project" %><span class="text-accent">.</span></h1><p class="text-secondary">Track what you're building and where people can see it.</p></div>
+<form class="panel form-panel" method="POST" action="<%= action %>">
+  <% if (isEdit) { %><input type="hidden" name="_method" value="PUT"><% } %>
+  <div class="mb-3"><label class="form-label">Project name *</label><input class="form-control" name="name" required maxlength="100" value="<%= project.name || '' %>" placeholder="e.g. DevProof"></div>
+  <div class="mb-3"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="3" maxlength="1000" placeholder="What problem does it solve?"><%= project.description || "" %></textarea></div>
+  <div class="mb-3"><label class="form-label">Status</label><select class="form-select" name="status"><% ["planned","in-progress","completed","paused"].forEach(v => { %><option value="<%= v %>" <%= (project.status || "in-progress") === v ? "selected" : "" %>><%= v %></option><% }) %></select></div>
+  <div class="row g-3"><div class="col-md-6"><label class="form-label">GitHub URL</label><input class="form-control" type="url" name="githubUrl" value="<%= project.githubUrl || '' %>" placeholder="https://github.com/username/repo"></div><div class="col-md-6"><label class="form-label">Live demo URL</label><input class="form-control" type="url" name="liveUrl" value="<%= project.liveUrl || '' %>" placeholder="https://example.com"></div></div>
+  <div class="d-flex gap-2 mt-4"><button class="btn btn-primary"><%= isEdit ? "Save changes" : "Create project" %></button><a href="/projects" class="btn btn-outline-light">Cancel</a></div>
+</form>
+<%- include("../partials/footer") %>

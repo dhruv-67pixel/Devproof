@@ -1,0 +1,9 @@
+<%- include("../partials/header", { title }) %>
+<div class="page-heading d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4"><div><p class="eyebrow">EVERY BUG TEACHES SOMETHING</p><h1>Bug Journal<span class="text-accent">.</span></h1><p class="text-secondary mb-0">Keep a searchable memory of what broke and how you fixed it.</p></div><a href="/bugs/new" class="btn btn-primary">+ Log a bug</a></div>
+<section class="panel">
+<% if (!bugs.length) { %><%- include("../partials/empty", { heading: "No bugs logged", message: "The next time something breaks, record the cause and the lesson." }) %><% } else { %>
+<div class="table-responsive"><table class="table app-table align-middle"><thead><tr><th>Bug</th><th>Technology</th><th>Project</th><th>Severity</th><th>Status</th><th>Created</th><th></th></tr></thead><tbody>
+<% bugs.forEach(bug => { %><tr><td><div class="fw-semibold"><%= bug.title %></div><% if(bug.lesson) { %><div class="small text-secondary">Lesson: <%= bug.lesson %></div><% } %></td><td><%= bug.technology %></td><td><%= bug.projectId ? bug.projectId.name : "—" %></td><td><span class="status-pill <%= bug.severity === 'high' ? 'pill-red' : bug.severity === 'medium' ? 'pill-purple' : 'pill-muted' %>"><%= bug.severity %></span></td><td><span class="status-pill <%= bug.status === 'solved' ? 'pill-green' : 'pill-muted' %>"><%= bug.status %></span></td><td class="small text-secondary"><%= formatDate(bug.createdAt) %></td><td><div class="d-flex gap-2"><a class="btn btn-sm btn-outline-light" href="/bugs/<%= bug._id %>/edit">Edit</a><form method="POST" action="/bugs/<%= bug._id %>?_method=DELETE" data-confirm="Delete this bug log?"><button class="btn btn-sm btn-outline-danger">Delete</button></form></div></td></tr><% }) %>
+</tbody></table></div><% } %>
+</section>
+<%- include("../partials/footer") %>
