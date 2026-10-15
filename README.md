@@ -1,79 +1,136 @@
 # DevProof
 
-DevProof is a full-stack developer skill evidence tracker built with Node.js, Express, MongoDB, Mongoose, EJS and Bootstrap.
+A full-stack developer skill and evidence tracker built with **Node.js, Express.js, MongoDB, Mongoose, EJS, and Bootstrap**.
 
 ## Features
 
-- Dashboard statistics and MongoDB aggregation
-- CRUD for skills, projects, evidence entries and bug logs
-- Reference relationships between projects, skills and evidence
+- Dashboard statistics powered by MongoDB aggregation
+- CRUD operations for skills, projects, evidence entries, and bug logs
+- Relationships between projects, skills, and evidence
 - Evidence verification checkbox
-- Bug root-cause / fix / lesson journal
-- Form validation through Mongoose schemas
-- Responsive dark UI
-- Confirmation before delete actions
+- Bug journal for recording root causes, fixes, and lessons learned
+- Form validation using Mongoose schemas
+- Responsive dark user interface
+- Confirmation prompts before delete actions
 
 ## Requirements
 
-- Node.js (LTS recommended)
+- [Node.js](https://nodejs.org/) (LTS recommended)
 - MongoDB Community Server running locally, or a MongoDB Atlas connection string
+- npm (included with Node.js)
 
-## Setup on Windows
+## Getting Started
 
-1. Extract the project ZIP.
-2. Open the extracted `devproof` folder in VS Code.
-3. Open a terminal in that folder.
-4. Install dependencies:
+### 1. Clone the repository
 
-   ```bash
-   npm install
-   ```
+```bash
+git clone https://github.com/dhruv-67pixel/Devproof.git
+cd Devproof
+```
 
-5. Copy `.env.example` to `.env`. In VS Code, you can right-click `.env.example`, duplicate it, and rename the copy to `.env`.
-6. Confirm `MONGODB_URI` matches your MongoDB setup. Default:
+Alternatively, download the repository as a ZIP and extract it.
 
-   ```text
-   mongodb://127.0.0.1:27017/devproof
-   ```
+### 2. Install dependencies
 
-7. Start the app:
+Open a terminal in the project folder and run:
 
-   ```bash
-   npm run dev
-   ```
+```bash
+npm install
+```
 
-8. Visit `http://localhost:3000`.
+### 3. Configure environment variables
 
-If `npm run dev` says the script is missing, check that you ran `npm install` from the folder containing `package.json`.
+Copy `.env.example` to a new file named `.env`.
 
-## MongoDB collections
+On Windows Git Bash, run:
 
-Mongoose creates these collections when the first document is saved:
+```bash
+cp .env.example .env
+```
+
+Open `.env` and configure your MongoDB connection:
+
+```env
+MONGODB_URI=mongodb://127.0.0.1:27017/devproof
+PORT=3000
+```
+
+If you're using MongoDB Atlas, replace the local MongoDB URI with your Atlas connection string.
+
+### 4. Start MongoDB
+
+Make sure your local MongoDB server is running if you're using the local connection.
+
+### 5. Run the application
+
+```bash
+npm run dev
+```
+
+Open your browser and visit:
+
+[http://localhost:3000](http://localhost:3000)
+
+## MongoDB Collections
+
+Mongoose creates these collections when documents are first saved:
 
 - `skills`
 - `projects`
 - `evidence`
 - `buglogs`
 
-## First-use workflow
+## How to Use
 
-1. Add a few skills in Skill Vault.
-2. Add a project in Project Vault.
-3. Add evidence and select the project and skills it demonstrates.
-4. Add bugs and record root cause, fix and lesson learned.
-5. Review dashboard metrics.
+1. Add your skills in Skill Vault.
+2. Create a project in Project Vault.
+3. Add evidence and link it to the relevant project and skills.
+4. Record bugs, root causes, fixes, and lessons learned.
+5. Review your progress using the dashboard statistics.
 
-## Important notes
+## Project Structure
 
-- This is a local learning project. It does not include authentication, so do not expose it publicly as-is.
-- A proof URL is user-entered and is not automatically verified.
-- Deleting a project also deletes evidence attached to that project. Related bug logs are retained but detached from the deleted project.
-- The Bootstrap stylesheet is loaded from a CDN, so an internet connection is needed for the intended styling.
+```text
+DevProof/
+├── public/
+│   ├── css/
+│   └── js/
+├── src/
+│   ├── models/
+│   ├── routes/
+│   └── views/
+├── .env.example
+├── .gitignore
+├── package.json
+├── server.js
+└── README.md
+```
 
-## Suggested advanced MongoDB exercises
+## Future Improvements
 
-1. Add a text index to bug titles and lessons and implement bug search.
-2. Add a `$lookup` aggregation that reports evidence count per skill.
-3. Add pagination to skills and evidence pages.
-4. Add a unique index for project names if desired.
-5. Add authentication before deploying to the public internet.
+- Add text search for bug titles and lessons
+- Use MongoDB `$lookup` to report evidence counts per skill
+- Add pagination to skills and evidence pages
+- Add unique indexes for project names
+- Implement authentication and authorization
+
+## Important Notes
+
+- This project is intended for local learning and development. It does not include authentication, so do not expose it publicly as-is.
+- Evidence URLs are entered by users and are not automatically verified.
+- Deleting a project also deletes its associated evidence. Related bug logs are retained but detached from the deleted project.
+- Bootstrap styling is loaded from a CDN, so an internet connection is required for the intended appearance.
+- Never commit your `.env` file, database credentials, or other secrets to GitHub.
+
+## Author
+
+**Dhruv**
+
+GitHub: [@dhruv-67pixel](https://github.com/dhruv-67pixel)
+
+---
+
+Built as a hands-on project to practise full-stack web development and MongoDB.
+
+
+
